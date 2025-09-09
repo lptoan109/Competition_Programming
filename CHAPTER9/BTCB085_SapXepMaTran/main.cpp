@@ -66,23 +66,27 @@ void mttangdantheoduongcheochinh(int m, int n, int f){
             if(vtd>=n){
                 vtd = ld-1;
                 vtc=0;
+                ld-=1;
             }
             if(vtc>=m){
                 vtc = lc+1;
                 vtd=0;
+                lc+=1;
             }
         }
-        ld = 0, lc = 1, i = 0, vtd = 0, vtc=1;
+        ld = 0, lc = 1, i = f, vtd =0, vtc=1;
         while(i<n*m){
             mt[vtd][vtc] = ma[i];
-            vtd++; vtc++; i++;
+            vtd++; vtc++; i--;
             if(vtd>=n){
                 vtd = ld-1;
                 vtc=0;
+                ld-=1;
             }
             if(vtc>=m){
                 vtc = lc+1;
                 vtd=0;
+                lc+=1;
             }
         }
         xuatmt(m,n);

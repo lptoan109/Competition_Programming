@@ -22,9 +22,8 @@ void xuatmt(int n, int m){
     }
 }
 void luuramang(int n, int m){
-    if(n!=m) cout << "No";
-    else{
-        int na = 0, j = 1;
+        int j = 1,na;
+        na = 0;
         for(int i = 0; i<m; ++i){
             ma[na] = mt[i][i];
             na++;
@@ -35,11 +34,8 @@ void luuramang(int n, int m){
             j++;
         }
         xuatma(na);
-    }
 }
 void doicho(int n, int m){
-    if(n!=m) cout << "No";
-    else{
         double ln;
         for(int i = 0; i<n; ++i){
             ln = -DBL_MAX;
@@ -56,11 +52,8 @@ void doicho(int n, int m){
             }
         }
         xuatmt(n,m);
-    }
 }
 void sapxep(int n, int m){
-    if(n!=m) cout << "No" << "\n";
-    else{
         double nn;
         for(int j = 0; j<m; ++j){
             nn = DBL_MAX;
@@ -93,24 +86,38 @@ void sapxep(int n, int m){
             q++;
         }
         xuatmt(n,m);
-    }
 }
 void tongtamgiactren(int n, int m){
-    if(n!=m) cout << "No";
-    else{
-        double s = 0;
-        int t = n;
-        for(int i = m-1; i>=0; --i){
-            for(int j = 0; j<t; ++j){
-                s+=mt[j][i];
-            }
-            t-=1;
+    double s = 0;
+    for (int i = 0; i < n; ++i) {
+        for (int j = i; j < m; ++j) {
+            s += mt[i][j];
         }
-        cout << s;
     }
+    cout << s;
 }
 void mangsongsong(int n, int m){
-
+        int d = n-2, c = 0, ld = d, lc = c, na;
+        ma[0] = mt[n-1][0];
+        for(na = 1; na<(n*m)-1; ++na){
+            if(d==0) break;
+            ma[na] = mt[d][c];
+            d++; c++;
+            if(d>=n){
+                ld--; lc = 0;
+                d = ld; c = lc;
+            }
+        }
+        d = 0, c = 1, ld = d, lc = c;
+        for(; na<(n*m)-m; ++na){
+            ma[na] = mt[d][c];
+            d++; c++;
+            if(c>=m){
+                ld=0; lc++;
+                d = ld; c = lc;
+            }
+        }
+        xuatma(na);
 }
 int main()
 {
@@ -120,13 +127,17 @@ int main()
     freopen("BTCB087.OUT", "w", stdout);
     int n,m;
     nhap(n,m);
-    luuramang(n,m);
-    cout << "\n" << "\n";
-    doicho(n,m);
-    cout << "\n";
-    sapxep(n,m);
-    cout << "\n";
-    tongtamgiactren(n,m);
-    cout << "\n" << "\n";
+    if(n!=m) cout << "No\n\nNo\n\nNo\n\nNo\n\nNo";
+    else{
+        luuramang(n,m);
+        cout << "\n" << "\n";
+        doicho(n,m);
+        cout << "\n";
+        sapxep(n,m);
+        cout << "\n";
+        tongtamgiactren(n,m);
+        cout << "\n" << "\n";
+        mangsongsong(n,m);
+    }
     return 0;
 }

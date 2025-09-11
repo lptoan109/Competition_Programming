@@ -34,7 +34,7 @@
 		</Compiler>
 		<Unit filename="BTCB085.INP" />
 		<Unit filename="BTCB085.OUT" />
-		<Unit filename="main.cpp" />
+		<Unit filename="BTCB085.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -92,6 +92,24 @@ void mttangdantheoduongcheochinh(int m, int n, int f){
         xuatmt(m,n);
     }
 }
+void xoan_oc(int n, int m)
+{
+    long long idx = 0;
+    long long top = 0, bottom = n-1;
+    long long left = 0, right = m-1;
+    while(idx < n*m) {
+        for(long long j = left; j <= right && idx < n*m; j++) a[top][j] = x[idx++];
+        top++;
+        for(long long i = top; i <= bottom && idx < n*m; i++) a[i][right] = x[idx++];
+        right--;
+        for(long long j = right; j >= left && idx < n*m; j--) a[bottom][j] = x[idx++];
+        bottom--;
+        for(long long i = bottom; i >= top && idx < n*m; i--) a[i][left] = x[idx++];
+        left++;
+    }
+    cout << "Cau h: ma tran xoan oc tu ngoai vao trong\n";
+    PrintData(a,n,m);
+}
 int main()
 {
     ios_base::sync_with_stdio(false);

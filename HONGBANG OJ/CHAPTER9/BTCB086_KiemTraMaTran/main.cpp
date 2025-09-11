@@ -12,16 +12,20 @@ void nhap(int &n, int &m){
 bool dx1(int n, int m){
     if(n!=m && n<1 && m<1) return false;
     for(int i = 0; i<n; ++i){
-        for(int j = m; j>i; --j){
+        for(int j = m-1; j>=0; --j){
             if(mt[i][j]!=mt[j][i]) return false;
         }
+    }
+    int i = 0, d1 = n-1, c1 = 0;
+    for(int i = 0; i<n; ++i){
+
     }
     return true;
 }
 bool dx2(int n, int m){
     if(n!=m && n<1 && m<1) return false;
-    for(int i = n; i>0; --i){
-        for(int j=0; j<i; ++j){
+    for(int i = n-1; i>0; --i){
+        for(int j=m-1; j>0; --j){
             if(mt[i][j]!=mt[j][i]) return false;
         }
     }

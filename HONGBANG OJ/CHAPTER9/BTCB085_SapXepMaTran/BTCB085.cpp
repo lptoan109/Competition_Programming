@@ -59,63 +59,46 @@ void mttangdantheoduongcheochinh(int m, int n, int f){
     else{
         sort(ma,ma+f);
         cout << "Cau h: ma tran tang theo duong cheo chinh\n";
-        int ld = n-1, lc = 0, i = 0, vtd = n-1, vtc=0;
-        while(i<n*m){
-            mt[vtd][vtc] = ma[i];
-            vtd++; vtc++; i++;
-            if(vtd>=n){
-                vtd = ld-1;
-                vtc=0;
-                ld-=1;
-            }
-            if(vtc>=m){
-                vtc = lc+1;
-                vtd=0;
-                lc+=1;
-            }
+            long long idx = 0;
+        long long top = 0, bottom = n-1;
+        long long left = 0, right = m-1;
+        while(idx < n*m) {
+            for(long long j = left; j <= right && idx < n*m; j++) mt[top][j] = ma[idx++];
+            top++;
+            for(long long i = top; i <= bottom && idx < n*m; i++) mt[i][right] = ma[idx++];
+            right--;
+            for(long long j = right; j >= left && idx < n*m; j--) mt[bottom][j] = ma[idx++];
+            bottom--;
+            for(long long i = bottom; i >= top && idx < n*m; i--) mt[i][left] = ma[idx++];
+            left++;
         }
-        ld = 0, lc = 1, i = f, vtd =0, vtc=1;
-        while(i<n*m){
-            mt[vtd][vtc] = ma[i];
-            vtd++; vtc++; i--;
-            if(vtd>=n){
-                vtd = ld-1;
-                vtc=0;
-                ld-=1;
-            }
-            if(vtc>=m){
-                vtc = lc+1;
-                vtd=0;
-                lc+=1;
-            }
-        }
-        xuatmt(m,n);
     }
 }
-void xoan_oc(int n, int m)
+void xoan_oc(int n, int m, int f)
 {
+    sort(ma,ma+f);
     long long idx = 0;
     long long top = 0, bottom = n-1;
     long long left = 0, right = m-1;
     while(idx < n*m) {
-        for(long long j = left; j <= right && idx < n*m; j++) a[top][j] = x[idx++];
+        for(long long j = left; j <= right && idx < n*m; j++) mt[top][j] = ma[idx++];
         top++;
-        for(long long i = top; i <= bottom && idx < n*m; i++) a[i][right] = x[idx++];
+        for(long long i = top; i <= bottom && idx < n*m; i++) mt[i][right] = ma[idx++];
         right--;
-        for(long long j = right; j >= left && idx < n*m; j--) a[bottom][j] = x[idx++];
+        for(long long j = right; j >= left && idx < n*m; j--) mt[bottom][j] = ma[idx++];
         bottom--;
-        for(long long i = bottom; i >= top && idx < n*m; i--) a[i][left] = x[idx++];
+        for(long long i = bottom; i >= top && idx < n*m; i--) mt[i][left] = ma[idx++];
         left++;
     }
     cout << "Cau h: ma tran xoan oc tu ngoai vao trong\n";
-    PrintData(a,n,m);
+    xuatmt(m,n);
 }
 int main()
 {
     ios_base::sync_with_stdio(false);
-    freopen("BTCB085.INP", "r", stdin);
     cin.tie(0); cout.tie(0);
-    freopen("BTCB085.OUT", "w", stdout);
+    //freopen("BTCB085.INP", "r", stdin);
+    //freopen("BTCB085.OUT", "w", stdout);
     int m,f,n;
     nhap(m,n);
     mtma(m,n,f);
@@ -124,5 +107,7 @@ int main()
     mtgiamtheocot(m,n,f);
     cout << "\n" << "\n";
     mttangdantheoduongcheochinh(m,n,f);
+    cout << "\n" << "\n";
+    xoan_oc(n,m,f);
     return 0;
 }

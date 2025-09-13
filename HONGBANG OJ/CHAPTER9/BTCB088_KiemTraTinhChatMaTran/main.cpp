@@ -27,11 +27,11 @@ bool latinh(int n, int m){
     if(n!=m) return false;
     for(int i = 0; i<n; ++i){
         for(int j = 0; j<m; ++j){
-            if(mt[i][j]<1) return false;
+            if(mt[i][j]<1||mt[i][j]>m) return false;
         }
     }
     for(int i = 0; i<n; ++i){
-        int dd[n+1]={}, dc[m+1]={};
+        double dd[10000]={}, dc[10000]={};
         for(int j = 0; j<m; ++j){
             if(dd[int(mt[i][j])]==1) return false;
             else dd[int(mt[i][j])]=1;
@@ -43,12 +43,12 @@ bool latinh(int n, int m){
 }
 bool maphuong(int n, int m){
     if(n!=m) return false;
-    int dd[n*m]={};
+    double dd[10000]={};
     for(int i = 0; i<n; ++i){
         for(int j = 0; j<m; ++j){
-            if(mt[i][j]<1) return false;
+            if(mt[i][j]<1||mt[i][j]>n*m) return false;
             if(dd[int(mt[i][j])]==1) return false;
-            else dd[int(mt[i][j])] == 1;
+            else dd[int(mt[i][j])] = 1;
         }
     }
     double sc = 0, sd = 0, sdcc = 0, sdcp = 0;
@@ -65,7 +65,7 @@ bool maphuong(int n, int m){
         for(int j = 0; j<m; ++j){
             sdcp += mt[j][m-1-j];
         }
-        if(sc!=sd!=sdcc!=sdcp) return false;
+        if(sc != sd || sd != sdcc || sdcc != sdcp) return false;
     }
     return true;
 }

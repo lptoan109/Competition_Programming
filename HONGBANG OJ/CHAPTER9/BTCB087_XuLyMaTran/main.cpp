@@ -54,38 +54,51 @@ void doicho(int n, int m){
         xuatmt(n,m);
 }
 void sapxep(int n, int m){
-        double nn;
+    double mt1[105][105];
+    for(int i = 0; i<n; ++i)
         for(int j = 0; j<m; ++j){
-            nn = DBL_MAX;
-            for(int i = j; i<m; ++i){
-                if(mt[i][i]<nn)
-                    nn = mt[i][i];
+            mt1[i][j] = mt[i][j];
+        }
+    double nn;
+    for(int j = 0; j<m; ++j){
+        nn = DBL_MAX;
+        for(int i = j; i<m; ++i){
+            if(mt[i][i]<nn)
+                nn = mt[i][i];
+        }
+        for(int i = 0; i<m; ++i){
+            if(mt[i][i]==nn){
+                swap(mt[i][i], mt[j][j]);
+                break;
             }
-            for(int i = 0; i<m; ++i){
-                if(mt[i][i]==nn){
-                    swap(mt[i][i], mt[j][j]);
-                    break;
+        }
+    }
+    int j = 1,q=1;
+    double ln;
+    for(int k = 0; k<m; ++k){
+        ln = -DBL_MAX;
+        for(int i = k; i<m; ++i){
+            if(mt[i][m-j]>ln)
+                ln = mt[i][m-j];
+            j++;
+        }
+        j = 1;
+        for(int i = 0; i<m; ++i){
+            if(mt[i][m-j]==ln)
+                swap(mt[i][m-j], mt[k][m-q]);
+            j++;
+        }
+        q++;
+    }
+    if(n/2!=0){
+        if(mt[n/2-1][n/2-1]>mt[n/2][n/2]||mt[n/2][n/2]>mt[n/2+1][n/2+1]){
+            for(int i = 0; i<n; ++i)
+                for(int j = 0; j<m; ++j){
+                    mt[i][j] = mt1[i][j];
                 }
-            }
         }
-        int j = 1,q=1;
-        double ln;
-        for(int k = 0; k<m; ++k){
-            ln = -DBL_MAX;
-            for(int i = k; i<m; ++i){
-                if(mt[i][m-j]>ln)
-                    ln = mt[i][m-j];
-                j++;
-            }
-            j = 1;
-            for(int i = 0; i<m; ++i){
-                if(mt[i][m-j]==ln)
-                    swap(mt[i][m-j], mt[k][m-q]);
-                j++;
-            }
-            q++;
-        }
-        xuatmt(n,m);
+    }
+    xuatmt(n,m);
 }
 void tongtamgiactren(int n, int m){
     double s = 0;
